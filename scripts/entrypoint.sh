@@ -14,7 +14,7 @@ echo
 
 # Runs `flake8`, possibly with `reviewdog`:
 if [ "$INPUT_REPORTER" == 'terminal' ]; then
-  output=$(flake8 $INPUT_PATH)
+  output=$(flake8 --exit-zero $INPUT_PATH)
   status="$?"
 elif [ "$INPUT_REPORTER" == 'github-pr-review' ] ||
      [ "$INPUT_REPORTER" == 'github-pr-check' ]; then
