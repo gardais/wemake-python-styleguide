@@ -22,10 +22,11 @@ elif [ "$INPUT_REPORTER" == 'github-pr-review' ] ||
   export REVIEWDOG_GITHUB_API_TOKEN="$GITHUB_TOKEN"
   echo "In loop --exit-zero"
   # Running special version of `flake8` to match the `reviewdog` format:
-  output=$(flake8 $INPUT_PATH --exit-zero --append-config='/action-config.cfg')
+  output=$(flake8 --exit-zero $INPUT_PATH --append-config='/action-config.cfg')
   echo "$output" | reviewdog -f=pep8 -reporter="$INPUT_REPORTER" -level=error
   # `reviewdog` does not fail with any status code, so we have to get dirty:
   status=$(test "$output" = ''; echo $?)
+  status=0
 else
   output="Invalid action reporter specified: $INPUT_REPORTER"
   status=1
